@@ -1,47 +1,38 @@
-plugins {
-    id 'java'
-}
+apply plugin: 'java'
 
-group = 'fr.pandaguerrier'
-version = '1.0-SNAPSHOT'
+group 'ConodiaAPI'
+version '0.0.1-alpha'
+compileJava.options.encoding = 'UTF-8'
+sourceCompatibility = 1.11
 
 repositories {
     mavenCentral()
+
+    maven { url "https://oss.sonatype.org/content/groups/public/" }
+    maven { url "https://repo.maven.apache.org/maven2" }
+
     maven {
-        name = "papermc-repo"
-        url = "https://repo.papermc.io/repository/maven-public/"
+        name = 'papermc'
+        url = 'https://repo.papermc.io/repository/maven-public/'
     }
-    maven {
-        name = "sonatype"
-        url = "https://oss.sonatype.org/content/groups/public/"
-    }
+}
+
+configurations{
+    extraLibs
 }
 
 dependencies {
-compileOnly "com.destroystokyo.paper:paper-api:1.12-R0.1-SNAPSHOT"
+//    // https://mvnrepository.com/artifact/com.github.azbh111/spigot-1.8.8
+    implementation group: 'com.github.azbh111', name: 'spigot-1.8.8', version: 'R'
+    extraLibs group: 'org.java-websocket', name: 'Java-WebSocket', version: '1.5.3'
+    implementation fileTree(dir: 'lib', include: '*.jar')
+
+    configurations.implementation.extendsFrom(configurations.extraLibs)
 }
 
-def targetJavaVersion = 8
-java {
-    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    sourceCompatibility = javaVersion
-    targetCompatibility = javaVersion
-    if (JavaVersion.current() < javaVersion) {
-        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-    }
-}
-
-tasks.withType(JavaCompile).configureEach {
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        options.release = targetJavaVersion
-    }
-}
-
-processResources {
-    def props = [version: version]
-    inputs.properties props
-    filteringCharset 'UTF-8'
-    filesMatching('plugin.yml') {
-        expand props
+jar{
+    duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+    from {
+        configurations.extraLibs.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }

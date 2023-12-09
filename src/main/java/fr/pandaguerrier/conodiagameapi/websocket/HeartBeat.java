@@ -1,6 +1,8 @@
-package fr.pandaguerrier.conodia.websocket;
+package fr.pandaguerrier.conodiagameapi.websocket;
 
-import fr.pandaguerrier.conodia.ConodiaLinks;
+
+import fr.pandaguerrier.conodiagameapi.ConodiaGameAPI;
+import fr.pandaguerrier.conodiagameapi.websocket.enums.OpCode;
 
 public class HeartBeat {
     final int interval;
@@ -12,6 +14,6 @@ public class HeartBeat {
     }
 
     public void start() {
-        ConodiaLinks.getInstance().getServer().getScheduler().runTaskTimer(ConodiaLinks.getInstance(), () -> websocketManager.send(OpCode.HEARTBEAT, null), interval, interval);
+        ConodiaGameAPI.getInstance().getServer().getScheduler().runTaskTimer(ConodiaGameAPI.getInstance(), () -> websocketManager.send(OpCode.HEARTBEAT, null), interval, interval);
     }
 }

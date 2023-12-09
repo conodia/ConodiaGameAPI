@@ -1,4 +1,4 @@
-package fr.pandaguerrier.conodiagameapi.websocket;
+package fr.pandaguerrier.conodiagameapi.websocket.enums;
 
 public enum OpCode {
     AUTH(0),
@@ -6,7 +6,7 @@ public enum OpCode {
     HEARTBEAT_ACK(2),
     VERIFIED_USER(3);
 
-    final int value;
+    public int value;
 
     OpCode(int value) {
         this.value = value;

@@ -1,12 +1,12 @@
 package fr.pandaguerrier.conodiagameapi.api;
 
-import fr.pandaguerrier.conodia.api.adapters.DestroyAdapter;
-import fr.pandaguerrier.conodia.api.adapters.GetAdapter;
-import fr.pandaguerrier.conodia.api.adapters.PostAdapter;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import fr.pandaguerrier.conodiagameapi.api.adapters.DestroyAdapter;
+import fr.pandaguerrier.conodiagameapi.api.adapters.GetAdapter;
+import fr.pandaguerrier.conodiagameapi.api.adapters.PostAdapter;
+import fr.pandaguerrier.conodiagameapi.api.adapters.PutAdapter;
 import org.json.simple.JSONObject;
 
 public class ApiManager {
@@ -15,6 +15,7 @@ public class ApiManager {
 
     public ApiManager(String baseUrl) {
         this.baseUrl = baseUrl;
+        init();
     }
 
     public void init() {
@@ -39,7 +40,7 @@ public class ApiManager {
     }
 
     public JSONObject put(String url, JSONObject body) {
-        PostAdapter putAdapter = new PostAdapter(this.baseUrl);
+        PutAdapter putAdapter = new PutAdapter(this.baseUrl);
         putAdapter.setHeaders(this.getHeaders());
         putAdapter.setBody(body);
 

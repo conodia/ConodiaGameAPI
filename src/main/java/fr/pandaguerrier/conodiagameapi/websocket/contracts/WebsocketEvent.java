@@ -1,9 +1,9 @@
 package fr.pandaguerrier.conodiagameapi.websocket.contracts;
 
-abstract class WebsocketEvent {
-    public abstract void handle();
-}
+import fr.pandaguerrier.conodiagameapi.websocket.entities.WebsocketResponse;
+import fr.pandaguerrier.conodiagameapi.websocket.enums.EventEnum;
 
-public enum Events {
-    
+public abstract class WebsocketEvent {
+    public abstract void handle(WebsocketResponse response);
+    public abstract EventEnum getEvent();
 }

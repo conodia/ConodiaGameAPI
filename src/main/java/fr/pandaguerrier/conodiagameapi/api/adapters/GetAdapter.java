@@ -1,7 +1,8 @@
 package fr.pandaguerrier.conodiagameapi.api.adapters;
 
-import fr.pandaguerrier.conodia.api.contracts.Adapters;
-import fr.pandaguerrier.conodia.utils.Parser;
+
+import fr.pandaguerrier.conodiagameapi.api.contracts.Adapters;
+import fr.pandaguerrier.conodiagameapi.utils.Parser;
 import org.json.simple.JSONObject;
 
 import java.io.IOException;
